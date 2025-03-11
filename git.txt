@@ -1,0 +1,118 @@
+# Git 多设备协作完整指南
+
+本指南适用于在多台设备上使用 Git 进行代码管理和同步，基于 GitHub 远程仓库 `street-gaussian-Replication`。
+
+---
+
+## **1. 初次初始化仓库（仅适用于新项目）**
+
+```bash
+git init  # 初始化 Git 仓库
+```
+
+配置 Git 全局用户信息（仅需一次）：
+
+```bash
+git config --global user.email "@qq.com"
+git config --global user.name ""
+```
+
+添加远程仓库：
+
+```bash
+git remote add origin https://github.com/killasssss/street-gaussian-Replication.git
+```
+
+重命名分支并推送：
+
+```bash
+git branch -M main
+git push -u origin main  # 推送到远程
+```
+
+---
+
+## **2. 在多台设备上同步代码**
+
+### **设备 A（首次推送代码）**
+
+```bash
+git add .   # 添加所有文件
+git commit -m "first commit"  # 提交
+git push -u origin main  # 推送到远程仓库
+```
+
+### **设备 B（拉取代码进行修改）**
+
+如果需要在另一台设备上使用该仓库，先克隆代码：
+
+```bash
+git clone https://github.com/killasssss/street-gaussian-Replication.git  # 克隆远程仓库
+cd street-gaussian-Replication
+```
+
+之后在本地修改代码并同步到远程：
+
+```bash
+git pull origin main  # 拉取最新代码
+git add .
+git commit -m "更新代码"
+git push origin main  # 推送到远程
+```
+
+---
+
+## **3. 常用 Git 命令**
+
+### **查看状态**
+```bash
+git status  # 查看当前仓库的状态
+```
+
+### **查看提交日志**
+```bash
+git log --oneline --graph --decorate --all  # 查看提交历史（精简版）
+```
+
+### **切换分支**
+```bash
+git checkout -b new-feature  # 创建并切换到 new-feature 分支
+git checkout main  # 切换回 main 分支
+```
+
+### **合并代码**
+```bash
+git merge new-feature  # 把 new-feature 分支合并到当前分支
+```
+
+### **删除本地分支**
+```bash
+git branch -d new-feature  # 删除本地分支
+```
+
+### **删除远程分支**
+```bash
+git push origin --delete new-feature  # 删除远程分支
+```
+
+### **强制更新本地代码（谨慎使用！）**
+```bash
+git fetch --all
+git reset --hard origin/main  # 重置本地代码，使其与远程保持一致
+```
+
+---
+
+## **4. 多设备协作注意事项**
+
+1. **每次修改前先拉取最新代码**
+   ```bash
+   git pull origin main
+   ```
+2. **提交前检查 `git status`，确保没有未提交的更改**
+3. **遇到冲突时，需要手动解决后再 `git add .` 并 `git commit`**
+
+---
+
+使用以上 Git 工作流，你可以在多台设备上高效地管理 `street-gaussian-Replication` 项目！🚀
+
